@@ -4,11 +4,15 @@ from app.core.luhn import validate_luhn, generate_luhn
 
 app = FastAPI(title="Number Validator API")
 
+@app.get("/health")
+def health_check():
+    return {"status": "healthy"}
+
 class NumberPayload(BaseModel):
     number: str
 
 @app.post("/validate/luhn")
-def check_luhn(payload: NumberPayload):
+def validate_luhn_number(payload: NumberPayload):
     # Stripping spaces or dashes if users input them formatted
     clean_number = payload.number.replace(" ", "").replace("-", "")
     
@@ -19,7 +23,7 @@ def check_luhn(payload: NumberPayload):
     return {"number": payload.number, "valid": is_valid}
 
 @app.post("/generate/luhn")
-def check_luhn(payload: NumberPayload):
+def generate_luhn_digit(payload: NumberPayload):
     # Stripping spaces or dashes if users input them formatted
     clean_number = payload.number.replace(" ", "").replace("-", "")
     
