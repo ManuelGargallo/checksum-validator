@@ -1,4 +1,5 @@
-from app.core.luhn import validate_luhn, generate_luhn
+from app.core.luhn import generate_luhn, validate_luhn
+
 
 def test_valid_luhn() -> None:
     # A known valid Luhn number (e.g., standard test cases)
