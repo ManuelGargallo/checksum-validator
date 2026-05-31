@@ -29,16 +29,10 @@ Designed with performance in mind, the core logic utilizes pre-computed lookup t
    cd checksum-validator
    ```
 
-2. Create a virtual environment and install dependencies:
+2. Initialize the development environment:
    ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   pip install .
-   ```
-
-3. Install development dependencies (optional):
-   ```bash
-   pip install ".[dev]"
+   # This will install dependencies and setup pre-commit hooks
+   make init
    ```
 
 ## 🏃 Running the API
@@ -75,23 +69,17 @@ curl -X POST http://127.0.0.1:8000/generate/luhn \
 
 ## 🧪 Development
 
-This project uses a modern toolstack to maintain high code quality:
+This project uses a `Makefile` to standardize common development tasks:
 
-- **Testing**: `pytest`
-- **Linting & Formatting**: `ruff`
-- **Type Checking**: `mypy`
-
-Run the full suite:
 ```bash
-# Run tests
-pytest
+# Run the full suite (lint, format, typecheck, test)
+make all
 
-# Lint and format check
-ruff check .
-ruff format --check .
-
-# Type check
-mypy app
+# Run specific tasks
+make test        # Run pytest
+make lint        # Run ruff check
+make format      # Run ruff format
+make typecheck   # Run mypy
 ```
 
 ## 📄 License
