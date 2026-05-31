@@ -5,7 +5,7 @@ from app.core.luhn import validate_luhn, generate_luhn
 app = FastAPI(title="Number Validator API")
 
 @app.get("/health")
-def health_check():
+def health_check() -> dict[str, str]:
     return {"status": "healthy"}
 
 from pydantic import BaseModel, Field, field_validator
@@ -30,13 +30,13 @@ class NumberPayload(BaseModel):
         return clean
 
 @app.post("/validate/luhn")
-def validate_luhn_number(payload: NumberPayload):
+def validate_luhn_number(payload: NumberPayload) -> dict[str, str|bool]:
     """Verify if a number is valid according to the Luhn algorithm."""
     is_valid = validate_luhn(payload.number)
     return {"number": payload.number, "valid": is_valid}
 
 @app.post("/generate/luhn")
-def generate_luhn_digit(payload: NumberPayload):
+def generate_luhn_digit(payload: NumberPayload) -> dict[str, str]:
     """Generate the check digit for a given base number and return the full number."""
     added_digit = generate_luhn(payload.number)
     return {
