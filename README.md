@@ -29,9 +29,15 @@ Designed with performance in mind, the core logic utilizes pre-computed lookup t
    cd checksum-validator
    ```
 
-2. Initialize the development environment:
+2. Create and activate a virtual environment:
    ```bash
-   # This will install dependencies and setup pre-commit hooks
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+3. Initialize the development environment:
+   ```bash
+   # This installs dependencies and sets up pre-commit hooks
    make init
    ```
 
