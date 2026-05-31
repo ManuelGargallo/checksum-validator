@@ -1,15 +1,16 @@
-def _calculate_luhn_sum(number: str) -> int:
-    """Helper to reverse, double alternate digits, and calculate the Luhn sum."""
-    digits = [int(d) for d in number]
-    # Reverse to work right-to-left
-    checksum = digits[::-1]
+# Pre-computed values for (digit * 2) - 9 if product > 9 else (digit * 2)
+# Index:          0  1  2  3  4  5  6  7  8  9
+_LUHN_DOUBLED = (0, 2, 4, 6, 8, 1, 3, 5, 7, 9)
 
-    # Double every second digit starting from index 1
-    for i in range(1, len(checksum), 2):
-        doubled = checksum[i] * 2
-        checksum[i] = doubled - 9 if doubled > 9 else doubled
- 
-    return sum(checksum)
+def _calculate_luhn_sum(number: str) -> int:
+    """Luhn sum using a look-up table and zero array allocations."""
+    total = 0
+    is_alternate = False
+    for i in range(len(number) - 1, -1, -1):
+        digit = int(number[i])
+        total += _LUHN_DOUBLED[digit] if is_alternate else digit
+        is_alternate = not is_alternate
+    return total
 
 def validate_luhn(number: str) -> bool:
     """Verifies a string of numbers using the Luhn Algorithm."""
