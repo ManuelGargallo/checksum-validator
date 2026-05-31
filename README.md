@@ -43,14 +43,19 @@ Designed with performance in mind, the core logic utilizes pre-computed lookup t
 
 ## 🏃 Running the API
 
-Start the server using Uvicorn:
-
+### Development
+Start the server with hot-reload enabled (restarts on file changes):
 ```bash
 uvicorn app.main:app --reload
 ```
-
 The API will be available at `http://127.0.0.1:8000`.
 Visit `http://127.0.0.1:8000/docs` for the interactive Swagger UI.
+
+### Production
+For production environments, it is recommended to use multiple worker processes and disable reload:
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
+```
 
 ## 🔌 API Usage
 
