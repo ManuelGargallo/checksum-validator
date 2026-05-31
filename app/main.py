@@ -1,6 +1,7 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from app.core.luhn import validate_luhn, generate_luhn
+from fastapi import FastAPI
+from pydantic import BaseModel, Field, field_validator
+
+from app.core.luhn import generate_luhn, validate_luhn
 
 app = FastAPI(title="Number Validator API")
 
@@ -8,13 +9,16 @@ app = FastAPI(title="Number Validator API")
 def health_check() -> dict[str, str]:
     return {"status": "healthy"}
 
-from pydantic import BaseModel, Field, field_validator
+
 
 class NumberPayload(BaseModel):
     """Payload for Luhn algorithm operations."""
     number: str = Field(
         ..., 
-        description="The number to validate or use for generation. Can include spaces or hyphens.",
+        description=(
+            "The number to validate or use for generation. "
+            "Can include spaces or hyphens."
+        ),
         examples=["79927398713", "123-456-789", "12 34 56"]
     )
 
