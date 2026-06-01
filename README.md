@@ -66,14 +66,22 @@ curl http://127.0.0.1:8000/health
 
 ### Validate a Number
 ```bash
-curl -X POST http://127.0.0.1:8000/validate/luhn \
+curl -X POST http://127.0.0.1:8000/api/v1/validate/luhn \
      -H "Content-Type: application/json" \
      -d '{"number": "7992-7398-713"}'
 ```
 
+### Batch Validation (Advanced)
+Validate multiple numbers in a single request to reduce network overhead:
+```bash
+curl -X POST http://127.0.0.1:8000/api/v1/validate/luhn/batch \
+     -H "Content-Type: application/json" \
+     -d '{"numbers": ["79927398713", "79927398714"]}'
+```
+
 ### Generate a Check Digit
 ```bash
-curl -X POST http://127.0.0.1:8000/generate/luhn \
+curl -X POST http://127.0.0.1:8000/api/v1/generate/luhn \
      -H "Content-Type: application/json" \
      -d '{"number": "7992739871"}'
 ```
