@@ -101,6 +101,13 @@ make format      # Run ruff format
 make typecheck   # Run mypy
 ```
 
+## 🗺️ Roadmap
+
+Future enhancements planned for the Checksum Validator API:
+
+- **Prometheus Metrics Middleware**: Expose a `/metrics` endpoint to track request throughput, status codes, and the execution latency of the Luhn algorithm under load.
+- **Production-Grade Dockerfile**: Implement a multi-stage build using a minimal runtime (Alpine or Distroless) to ensure secure, high-performance container images under 100MB.
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
